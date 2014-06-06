@@ -1,4 +1,4 @@
-CopaDeadlock
+Deadlock World Cup
 ============
 
 Projeto do Problema 02 do Padrões e Frameworks, Estatisticas da Copa do Mundo da FIFA.
@@ -6,8 +6,7 @@ Projeto do Problema 02 do Padrões e Frameworks, Estatisticas da Copa do Mundo d
 Abrindo o projeto no Eclipse
 ================================================
 
-1 - Para as alterações realizadas neste repositório, a versão do <b>Eclipse</b> a ser utilizada será a 4.3 
-(<b>Eclipse Kepler</b>), que pode ser baixada para os sistemas operacionais Windows, Linux e Mac neste link:
+1 - Para as alterações realizadas neste repositório, a versão do <b>Eclipse</b> a ser utilizada será a <b>Eclipse IDE for Java EE Developers</b>, que pode ser baixada para os sistemas operacionais Windows, Linux e Mac neste link:
 
 http://www.eclipse.org/downloads/
 
@@ -15,17 +14,26 @@ http://www.eclipse.org/downloads/
 
 http://git-scm.com/
 
-3 - Tendo instalado o Eclipse Kepler e o GIT, abra o Eclipse, na perspectiva "<i>Git Repository Exploring</i>". Clique no 
-botão "<i>Clone a Git Repository and add the clone to this view</i>". 
+3 - Tendo instalado o Eclipse IDE for Java EE Developers e o GIT, abra o Eclipse, na perspectiva "<i>Git Repository Exploring</i>". Clique no botão "<i>Clone a Git Repository and add the clone to this view</i>". 
 
 <img src="http://docs.joomla.org/images/b/bd/Git-coders-tutorial-20121009-01.png" />
 
 No campo URI, cole o endereço deste repositório:
 
-https://github.com/sfohart/jabref-2.9.2.git
+https://github.com/gutembergborges/worldcup-deadlock
+
+(Na imagem está de exemplo: https://github.com/sfohart/jabref-2.9.2.git)
 
 Clicando em "next", você poderá ver todos os branches disponíveis neste repositório. Neste caso, os seguintes branches estarão 
 disponíveis:
+
+<ul>
+	<li>master</li>
+	<li>test</li>
+	<li>self</li>
+</ul>
+
+De exemplo na imagem está:
 
 <ul>
 	<li>master</li>
@@ -41,7 +49,7 @@ Clicando mais uma vez em "next", você poderá configurar em qual diretório o E
 É recomendável que você deixe a configuração como está. Clique em "Finish" e o Eclipse fará o download dos 
 arquivos deste repositório para o seu computador.
 
-4 - Crie um branch local de nome "phase-01" 
+4 - Crie um branch local de nome "master" ("phase-01" de exemplo na imagem) 
 
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/criando-branch-local.png" />
 
@@ -52,7 +60,7 @@ verá as configurações para o branch remoto
 
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/configurando-push-01.PNG" />
 
-Selecione o branch recém criado <i>phase-01</i> lique no botão Edit
+Selecione o branch recém criado <i>master</i> ("phase-01" na imagem) clique no botão Edit
 
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/configurando-push-03.PNG" />
 
@@ -61,7 +69,7 @@ Configure para o branch remoto respectivo, como na imagem abaixo
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/configurando-push-02.PNG" />
 
 
-5 - Expanda o diretório de trabalho, clique com o botão direito do mouse na pasta "<b>jabref-2.9.2</b>" e selecione
+5 - Expanda o diretório de trabalho, clique com o botão direito do mouse na pasta "<b>worldcup-deadlock</b>" ("jabref-2.9.2" de exemplo na imagem) e selecione
 a opção <b>Import Projects...</b>. Clique em "next" e, depois, em "finish"
 
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/import-projects.png" />
@@ -87,45 +95,11 @@ Para compilar e executar o projeto, execute a task <b>run</b> deste build file.
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/configurando-ant-03.PNG" />
 
 
-Requisições de Mudança - Fase 01
+Regras do Respositório
 ===================================================
 
-Durante a primeira fase de requisições de mudança, todas as alterações deverão ser comitadas dentro do branch
-<b>phase-01</b>. Qualquer commit realizado em outro branch, para esta fase, implicará na invalidação da nota do grupo
-para esta fase. Atentem para o fato de que cada commit é identificado com o login do respectivo desenvolvedor.
+Durante o desenvolvimento do nosso projeto, todas as alterações deverão ser comitadas dentro do branch <b>master</b>. Existe o branch <b>test</b> para caso queiram realizar testes, testar commits, commitar alterações ainda não ideais ou incompletas para o repositório. Busquem commitar para o branch <b>master</b> apenas quando a funcionalidade construída esteja funcionando eficientemente e de forma completa, para sempre mantermos uma versão coesa do nosso software, do contrário commitem para <b>test</b> ou <b>self</b>. Lembrem que a comunicação entre o grupo para os commits continua sendo importante, mas garanto que teremos menos bugs com este repositório. Atentem para o fato de que cada commit é identificado com o login do respectivo desenvolvedor.
 
-
-<ul>
-	<li><b>Mudança 01:</b> Incluir nome de cada membro da equipe na tela "Ajuda > Sobre JabRef", dentro da seção 
-	"Contributions from".</li>
-	
-	<li><b>Mudança 02:</b> Utilizar por padrão um único tema para a aplicação em todas as plataformas possíveis  
-	(Windows, Linux ou Mac), ao invés de utilizar o tema padrão do sistema operacional</li>
-	
-	<li><b>Mudança 03:</b> Alterar o esquema de cores do menu Editar > Marcar cor específica, de modo que as 
-	cores padrão exibidas neste submenu correspondam às cores abaixo (em hexadecimal), nesta ordem:
-
-	<ul>
-		<li>#F3E778</li>
-		<li>#F1E6AF</li>
-		<li>#F4BC7B</li>
-		<li>#D96842</li>
-		<li>#D83E3E</li>
-	</ul>
-
-	Verificar se, por algum motivo, as cores anteriores estão gravadas em algum arquivo de configuração, 
-	ou no registro do sistema operacional. Neste caso, limpe tais informações antes de testar.</li>
-	
-	<li><b>Mudança 04:</b> Altere a tecla de atalho do ítem de menu "Arquivo > Fechar base de dados" de 
-	"Ctrl+W" para "Ctrl+Shift+W".</li>
-	
-	<li><b>Mudança 05:</b> Modifique a tela de conexão com o banco de dados de modo que, ao selecionar o 
-	tipo de servidor MySQL, o usuário seja "<b>root</b>", e ao selecionar o tipo PostgreSQL, o usuário 
-	seja "<b>postgres</b>".</li>
-	
-	<li><b>Mudança 06:</b> Na tela de edição de entradas Bibtex, para a aba de edição do código 
-	fonte bibtex, altere a tabulação: ao invés de dois espaços em branco, utilize o caractere de tabulação</li>
-</ul>
 
 Commitando alterações
 ===================================================
@@ -155,9 +129,7 @@ repositório remoto (GitHub). Para isso, clique com o botão direito do mouse no
 
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/commitando-alteracoes-04.png" />
 
-5 - Em "Source ref", selecione o branch local phase-01. Em "Destination ref", selecione o branch remoto "phase-01".
-Clique em "Add Spec". Feito isso, clique em "next". Caso a listagem já exiba configuração semelhante, 
-este passo não é necessário.
+5 - Em "Source ref", selecione o branch local master (phase-01 de exemplo na imagem). Em "Destination ref", selecione o branch remoto "master" ("phase-01" de exemplo na imagem). Clique em "Add Spec". Feito isso, clique em "next". Caso a listagem já exiba configuração semelhante, este passo não é necessário.
 
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/commitando-alteracoes-05.png" />
 
