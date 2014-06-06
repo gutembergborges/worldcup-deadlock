@@ -95,7 +95,7 @@ Para compilar e executar o projeto, execute a task <b>run</b> deste build file.
 <img src="https://raw.github.com/sfohart/jabref-2.9.2/master/doc/configurando-ant-03.PNG" />
 
 
-Regras do Respositório
+Política do Repositório
 ===================================================
 
 Durante o desenvolvimento do nosso projeto, todas as alterações deverão ser comitadas dentro do branch <b>master</b>. Existe o branch <b>test</b> para caso queiram realizar testes, testar commits, commitar alterações ainda não ideais ou incompletas para o repositório. Busquem commitar para o branch <b>master</b> apenas quando a funcionalidade construída esteja funcionando eficientemente e de forma completa, para sempre mantermos uma versão coesa do nosso software, do contrário commitem para <b>test</b> ou <b>self</b>. Lembrem que a comunicação entre o grupo para os commits continua sendo importante, mas garanto que teremos menos bugs com este repositório. Atentem para o fato de que cada commit é identificado com o login do respectivo desenvolvedor.
