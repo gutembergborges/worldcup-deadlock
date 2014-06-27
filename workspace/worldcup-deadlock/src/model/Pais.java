@@ -1,11 +1,14 @@
 package model;
 
-import org.hibernate.annotations.Entity;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Pais {
 	
-	Integer id;
+	@Id @GeneratedValue
+	Long id;
 	String nome;
 	String continente;
 	
