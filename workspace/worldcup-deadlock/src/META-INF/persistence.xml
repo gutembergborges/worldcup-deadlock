@@ -8,7 +8,7 @@
 			root
 		</property>
 		<property name="hibernate.connection.password">
-			1234
+			
 		</property>
 		<property name="hibernate.connection.url">
 			jdbc:mysql://localhost:3306/wcupstats-deadlock
@@ -24,6 +24,7 @@
 		<property name="format_sql">true</property>
 
 		<!-- entidades -->
-		<mapping class="br.uefs.ecomp.compras.modelo.Pais" />
+		<mapping class="model.Pais" />
+		
 	</session-factory>
 </hibernate-configuration>
