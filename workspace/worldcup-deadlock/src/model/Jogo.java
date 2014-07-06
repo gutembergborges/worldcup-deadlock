@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+
 
 @Entity 
 @Table (name = "JOGO")
@@ -50,6 +54,21 @@ public class Jogo implements Serializable {
 	private Date tempo; //Na dúvida se o tipo é Date do java.util mesmo
 	
 	private String local;
+	
+	@Enumerated (EnumType.STRING)
+	@Column (name="FASE")
+	private Fase fase;
+	
+	
+	
+
+	public Fase getFase() {
+		return fase;
+	}
+
+	public void setFase(Fase fase) {
+		this.fase = fase;
+	}
 
 	public Long getId() {
 		return id;

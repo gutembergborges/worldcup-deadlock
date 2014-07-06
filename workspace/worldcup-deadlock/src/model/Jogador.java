@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,6 +39,19 @@ public class Jogador implements Serializable{
 	
 	@OneToMany(mappedBy = "id_gol")
 	private List<Gol> gols;
+	
+	@Enumerated (EnumType.STRING)
+	@Column (name="POSICAO")
+	private Posicao posicao;
+	
+
+	public Posicao getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(Posicao posicao) {
+		this.posicao = posicao;
+	}
 
 	public Long getId() {
 		return id;
