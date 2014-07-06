@@ -27,4 +27,36 @@ public class Copa implements Serializable {
 	@OneToMany (mappedBy = "JOGO")
 	private List<Jogo> jogos;
 
+	public Integer getAno() {
+		return ano;
+	}
+
+	public void setAno(Integer ano) {
+		this.ano = ano;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
+	public List<Selecao> getSelecoes() {
+		return selecoes;
+	}
+
+	public void setSelecoes(List<Selecao> selecoes) {
+		this.selecoes = selecoes;
+	}
+
+	public List<Jogo> getJogos() {
+		return jogos;
+	}
+
+	public void setJogos(List<Jogo> jogos) {
+		this.jogos = jogos;
+	}
+
 }

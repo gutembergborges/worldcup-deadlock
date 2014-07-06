@@ -6,7 +6,6 @@ public class Teste {
 		
 		//Fazer um teste aqui pra verificar se as tabelas estão sendo criadas		
 		
-
 	}
 
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table (name = "JOGADOR")
-public class Jogador {
+public class Jogador implements Serializable{
 	
 	@Id
 	@GeneratedValue
@@ -27,9 +28,6 @@ public class Jogador {
 	@JoinColumn(name = "id_selecao")
 	private Selecao selecao;
 	
-	@OneToMany(mappedBy = "id_substitucao")
-	private List<Substituicao> substituicoes; 
-	
 	private String nome;
 	
 	@Temporal(TemporalType.DATE)
@@ -39,7 +37,53 @@ public class Jogador {
 	
 	@OneToMany(mappedBy = "id_gol")
 	private List<Gol> gols;
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Selecao getSelecao() {
+		return selecao;
+	}
+
+	public void setSelecao(Selecao selecao) {
+		this.selecao = selecao;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Date getData_nascimento() {
+		return data_nascimento;
+	}
+
+	public void setData_nascimento(Date data_nascimento) {
+		this.data_nascimento = data_nascimento;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
+	public List<Gol> getGols() {
+		return gols;
+	}
+
+	public void setGols(List<Gol> gols) {
+		this.gols = gols;
+	}
 
 }

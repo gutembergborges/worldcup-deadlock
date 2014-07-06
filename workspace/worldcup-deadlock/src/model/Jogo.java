@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,11 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity 
 @Table (name = "JOGO")
-public class Jogo {
+public class Jogo implements Serializable {
 	
 	@Id
 	@GeneratedValue
@@ -28,16 +33,94 @@ public class Jogo {
 	@JoinColumn(name = "id_selecao")
 	private Selecao selecaoA;
 	
+	@OneToOne(mappedBy="id_escalacao")
+	private Escalacao escalacaoA;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_selecao")
 	private Selecao selecaoB;
 	
+	@OneToOne(mappedBy="id_escalacao")
+	private Escalacao escalacaoB;
+	
 	@OneToMany(mappedBy = "GOL")
 	private List<Gol> gols;
 	
-	private String data;
+	@Temporal(TemporalType.TIME)
+	private Date tempo; //Na dúvida se o tipo é Date do java.util mesmo
+	
 	private String local;
 
-	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Copa getCopa() {
+		return copa;
+	}
+
+	public void setCopa(Copa copa) {
+		this.copa = copa;
+	}
+
+	public Selecao getSelecaoA() {
+		return selecaoA;
+	}
+
+	public void setSelecaoA(Selecao selecaoA) {
+		this.selecaoA = selecaoA;
+	}
+
+	public Escalacao getEscalacaoA() {
+		return escalacaoA;
+	}
+
+	public void setEscalacaoA(Escalacao escalacaoA) {
+		this.escalacaoA = escalacaoA;
+	}
+
+	public Selecao getSelecaoB() {
+		return selecaoB;
+	}
+
+	public void setSelecaoB(Selecao selecaoB) {
+		this.selecaoB = selecaoB;
+	}
+
+	public Escalacao getEscalacaoB() {
+		return escalacaoB;
+	}
+
+	public void setEscalacaoB(Escalacao escalacaoB) {
+		this.escalacaoB = escalacaoB;
+	}
+
+	public List<Gol> getGols() {
+		return gols;
+	}
+
+	public void setGols(List<Gol> gols) {
+		this.gols = gols;
+	}
+
+	public Date getTempo() {
+		return tempo;
+	}
+
+	public void setTempo(Date tempo) {
+		this.tempo = tempo;
+	}
+
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
 	
 }

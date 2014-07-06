@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,11 +27,14 @@ public class Pais implements Serializable {
 	@OneToMany(mappedBy = "SELECAO")
 	private List<Selecao> selecoes;
 
-	
-	public Long getId(){
-		return this.id;
+	public Long getId() {
+		return id;
 	}
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
