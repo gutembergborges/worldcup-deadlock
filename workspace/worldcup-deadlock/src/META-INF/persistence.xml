@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-<hibernate-configuration>
-	<session-factory>
-		<property name="hibernate.connection.username">
-			root
-		</property>
-		<property name="hibernate.connection.password">
-			
-		</property>
-		<property name="hibernate.connection.url">
-			jdbc:mysql://localhost:3306/wcupstats-deadlock
-		</property>
-		<property name="hibernate.connection.driver_class">
-			com.mysql.jdbc.Driver
-		</property>
-		<property name="hibernate.dialect">
-			org.hibernate.dialect.MySQL5InnoDBDialect
-		</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
-		<property name="show_sql">true</property>
-		<property name="format_sql">true</property>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
-		<!-- entidades -->
-		<mapping class="model.Pais" />
-		
-	</session-factory>
-</hibernate-configuration>
+	<persistence-unit name="WCUPSTATS" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>model.Pais</class>
+		<class>model.Copa</class>
+		<class>model.Escalacao</class>
+		<class>model.Fase</class>
+		<class>model.Gol</class>
+		<class>model.Posicao</class>
+		<class>model.Selecao</class>
+		<class>model.Substituicao</class>
+		<class>model.Tecnico</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/> 
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="1234"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/wcupstats-deadlock"/>
+		</properties>
+	</persistence-unit>
+</persistence>

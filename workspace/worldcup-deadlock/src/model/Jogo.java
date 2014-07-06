@@ -59,9 +59,6 @@ public class Jogo implements Serializable {
 	@Column (name="FASE")
 	private Fase fase;
 	
-	
-	
-
 	public Fase getFase() {
 		return fase;
 	}

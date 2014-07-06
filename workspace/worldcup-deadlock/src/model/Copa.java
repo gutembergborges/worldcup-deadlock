@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "COPA")
+@Table(name = "COPA")
 public class Copa implements Serializable {
 	
 	@Id
