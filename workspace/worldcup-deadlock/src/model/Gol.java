@@ -23,15 +23,15 @@ public class Gol implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_jogador")
+	@JoinColumn(name="id_jogador", insertable=true, updatable=true)
 	private Jogador jogador;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_selecao")
+	@JoinColumn(name="id_selecao", insertable=true, updatable=true)
 	private Selecao selecao;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_jogo")
+	@JoinColumn(name="id_jogo", insertable=true, updatable=true)
 	private Jogo jogo;
 	
 	@Temporal(TemporalType.TIME)

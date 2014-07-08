@@ -21,7 +21,7 @@ public class Tecnico implements Serializable {
 	private Long id;
 	
 	@OneToOne
-	@JoinColumn(name = "id_selecao")
+	@JoinColumn(name="id_selecao", insertable=true, updatable=true)
 	private Selecao selecao;
 	
 	private String nome;

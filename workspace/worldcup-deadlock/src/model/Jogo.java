@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,24 +31,26 @@ public class Jogo implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "ano")
+	@JoinColumn(name="id_copa", insertable=true, updatable=true)
 	private Copa copa;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_selecao")
+	@JoinColumn(name = "id_selecao", insertable=false, updatable=false)
 	private Selecao selecaoA;
 	
-	@OneToOne(mappedBy="id_escalacao")
+	@OneToOne
+	@PrimaryKeyJoinColumn(name = "id_escalacao")
 	private Escalacao escalacaoA;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_selecao")
+	@JoinColumn(name="id_selecao", insertable=true, updatable=true)
 	private Selecao selecaoB;
 	
-	@OneToOne(mappedBy="id_escalacao")
+	@OneToOne
+	@PrimaryKeyJoinColumn(name = "id_escalacao")
 	private Escalacao escalacaoB;
 	
-	@OneToMany(mappedBy = "GOL")
+	@OneToMany(mappedBy = "jogo")
 	private List<Gol> gols;
 	
 	@Temporal(TemporalType.TIME)

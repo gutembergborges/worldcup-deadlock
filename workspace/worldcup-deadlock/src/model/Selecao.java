@@ -25,27 +25,30 @@ public class Selecao implements Serializable {
 	private Integer ano;
 	
 	@ManyToOne 
-	@JoinColumn(name = "id_pais")
+	@JoinColumn(name="id_pais", insertable=true, updatable=true)
 	private Pais pais;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_copa")
+	@JoinColumn(name="id_copa", insertable=true, updatable=true)
 	private Copa copa;
 	
 	@OneToOne
 	@JoinColumn(name = "id_tecnico")
 	private Tecnico tecnico;
 	
-	@OneToMany (mappedBy = "id_jogo")
-	private List<Jogo> jogos;
+	@OneToMany(mappedBy = "selecaoA")
+	private List<Jogo> jogosA;
 	
-	@OneToMany (mappedBy = "id_jogador")
+	@OneToMany(mappedBy = "selecaoB")
+	private List<Jogo> jogosB;
+	
+	@OneToMany(mappedBy = "selecao") 
 	private List<Jogador> jogadores;
 	
-	@OneToMany (mappedBy = "id_escalacao")
+	@OneToMany(mappedBy = "selecao") 
 	private List<Escalacao> escalacoes;
 	
-	@OneToMany (mappedBy = "id_gol")
+	@OneToMany(mappedBy = "selecao")  
 	private List<Gol> gols;
 	
 	private Integer grupo;
@@ -91,12 +94,20 @@ public class Selecao implements Serializable {
 		this.tecnico = tecnico;
 	}
 	
-	public List<Jogo> getJogos() {
-		return jogos;
+	public List<Jogo> getJogosA() {
+		return jogosA;
 	}
 	
-	public void setJogos(List<Jogo> jogos) {
-		this.jogos = jogos;
+	public void setJogosA(List<Jogo> jogos) {
+		this.jogosA = jogos;
+	}
+	
+	public List<Jogo> getJogosB() {
+		return jogosB;
+	}
+	
+	public void setJogosB(List<Jogo> jogos) {
+		this.jogosB = jogos;
 	}
 	
 	public List<Jogador> getJogadores() {

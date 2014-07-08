@@ -27,19 +27,19 @@ public class Substituicao implements Serializable {
 	private Date tempo; //Na dúvida se o tipo é Date do java.util mesmo
 	
 	@ManyToOne
-	@JoinColumn (name = "id_jogo")
+	@JoinColumn(name="id_jogo", insertable=true, updatable=true)
 	private Jogo jogo;
 	
 	@ManyToOne
-	@JoinColumn (name = "id_selecao")
+	@JoinColumn(name="id_selecao", insertable=true, updatable=true)
 	private Selecao selecao;
 	
 	@OneToOne
-	@JoinColumn(name = "id_jogador")
+	@JoinColumn(name = "id_jogador", insertable=false, updatable=false)
 	private Jogador jogadorSai;
 	
 	@OneToOne
-	@JoinColumn(name = "id_jogador")
+	@JoinColumn(name = "id_jogador", insertable=true, updatable=true)
 	private Jogador jogadorEntra;
 
 	public Long getId() {
@@ -89,5 +89,7 @@ public class Substituicao implements Serializable {
 	public void setJogadorEntra(Jogador jogadorEntra) {
 		this.jogadorEntra = jogadorEntra;
 	}
+	
+	
 
 }

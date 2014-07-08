@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -24,15 +26,15 @@ public class Escalacao implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_selecao")
+	@JoinColumn(name="id_selecao", insertable=true, updatable=true) 
 	private Selecao selecao;
 	
 	@OneToOne
 	@PrimaryKeyJoinColumn(name = "id_jogo")
 	private Jogo jogo;
 	
-	@OneToMany
-	@JoinColumn(name = "id_jogador")
+	@ManyToMany
+	@JoinTable(name="escalacao_jogador", joinColumns=@JoinColumn(name="id_escalacao"), inverseJoinColumns=@JoinColumn(name="id_jogador"))
 	private List<Jogador> jogadores;
 
 	public Long getId() {

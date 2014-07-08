@@ -13,18 +13,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "COPA")
 public class Copa implements Serializable {
-	
+
 	@Id
 	private Integer ano;
 	
 	@ManyToOne 
-	@JoinColumn(name = "id_pais")
+	@JoinColumn(name="id_pais", insertable=true, updatable=true) 
 	private Pais pais;
 	
-	@OneToMany (mappedBy = "SELECAO")
+	@OneToMany(mappedBy = "copa") 
 	private List<Selecao> selecoes;
 	
-	@OneToMany (mappedBy = "JOGO")
+	@OneToMany(mappedBy = "copa") 
 	private List<Jogo> jogos;
 
 	public Integer getAno() {

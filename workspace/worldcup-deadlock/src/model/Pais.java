@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "PAIS")
 public class Pais implements Serializable {
-	
+
 	@Id 
 	@GeneratedValue 
 	@Column(name = "id_pais")
@@ -21,10 +21,10 @@ public class Pais implements Serializable {
 	private String nome;
 	private String continente;
 	
-	@OneToMany(mappedBy = "COPA")
+	@OneToMany(mappedBy = "pais")
 	private List<Copa> copas;
 	
-	@OneToMany(mappedBy = "SELECAO")
+	@OneToMany(mappedBy = "pais")
 	private List<Selecao> selecoes;
 
 	public Long getId() {
