@@ -29,7 +29,7 @@ public class HibernateUtil {
 		return instance;
 	}
 	
-	public SessionFactory getSessionFactory() {
+	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 

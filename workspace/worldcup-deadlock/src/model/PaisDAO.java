@@ -9,6 +9,6 @@ public interface PaisDAO {
 	public abstract void remover(Pais objeto);
 	public abstract void removerTodos();
 	public abstract List<Pais> listar();
-	public abstract Pais buscar(Long id);
+	public abstract Pais buscar(String nome);
 
 }

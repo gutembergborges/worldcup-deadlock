@@ -9,6 +9,6 @@ public interface TecnicoDAO {
 	public abstract void remover(Tecnico objeto);
 	public abstract void removerTodos();
 	public abstract List<Tecnico> listar();
-	public abstract Tecnico buscar(Long id);
+	public abstract Tecnico buscar(String nome);
 
 }

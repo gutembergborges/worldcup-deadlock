@@ -9,6 +9,6 @@ public interface SelecaoDAO {
 	public abstract void remover(Selecao objeto);
 	public abstract void removerTodos();
 	public abstract List<Selecao> listar();
-	public abstract Selecao buscar(Long id);
+	public abstract Selecao buscar(String nome);
 
 }
