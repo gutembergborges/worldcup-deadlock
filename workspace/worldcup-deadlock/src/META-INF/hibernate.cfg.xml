@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
+  
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/wcupstats</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">1234</property>
+    <property name="hibernate.hbm2ddl.auto">create-drop</property>
+	<property name="show_sql">true</property>
+	<property name="format_sql">true</property>
+	
+	<!-- entidades -->
+	<mapping class="model.Copa"/>
+	<mapping class="model.Escalacao"/>
+	<mapping class="model.Gol"/>
+	<mapping class="model.Jogador"/>
+	<mapping class="model.Jogo"/>
+	<mapping class="model.Pais"/>
+	<mapping class="model.Selecao"/>
+	<mapping class="model.Substituicao" />
+	<mapping class="model.Tecnico" />
+    
   </session-factory>
 </hibernate-configuration>

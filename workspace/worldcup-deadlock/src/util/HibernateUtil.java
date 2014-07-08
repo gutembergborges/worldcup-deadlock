@@ -14,7 +14,7 @@ public class HibernateUtil {
 	private HibernateUtil() {
 		try {
 			AnnotationConfiguration cfg = new AnnotationConfiguration();
-			cfg.configure("hibernate.cfg.xml");
+			cfg.configure("META-INF/hibernate.cfg.xml");
 			HibernateUtil.sessionFactory = cfg.buildSessionFactory();
 		} catch (HibernateException e) {
 			System.out.println("Criacao do objeto SessionFactory falhou: " + e);

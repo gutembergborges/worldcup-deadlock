@@ -1,14 +1,16 @@
 package model;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 public class Teste {
 
 	public static void main(String[] args) {
 		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("WCUPSTATS");
-		factory.close();
+		Pais pais = new Pais();
+		pais.setNome("Brasil");
+		pais.setContinente("America do Sul");
+		
+		PaisDAOHibernate paisHibernate = new PaisDAOHibernate();
+		paisHibernate.adicionar(pais);
+		
 	}
 
 }
