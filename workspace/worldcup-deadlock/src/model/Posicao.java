@@ -2,6 +2,20 @@ package model;
 
 public enum Posicao {
 	
-	ZAGUEIRO,LATERAL,MEIODECAMPO,VOLANTE,ATACANTE,CENTROAVANTE
+	ZAGUEIRO("Zagueiro"),
+	LATERAL("Lateral"),
+	MEIODECAMPO("Meio de Campo"),
+	VOLANTE("Volante"),
+	ATACANTE("Atacante");
+	
+	private final String posicao;
+
+    Posicao(String posicao) {
+        this.posicao = posicao;
+    }
+
+    public String getFuncao() {
+        return posicao;
+    }
 
 }
