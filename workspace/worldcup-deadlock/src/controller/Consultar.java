@@ -26,8 +26,8 @@ public class Consultar {
 	//UserStory#11
 	public List<Jogador> listarTodosJogadores(){
 		
-		List<Jogador> lista = null;
-		
+		jogadorDAO = new JogadorDAOHibernate();
+		List<Jogador> lista = jogadorDAO.listar();
 		return lista;
 	}
 	
@@ -66,11 +66,14 @@ public class Consultar {
 	}
 	
 	//UserStory#15
-	public List<Tecnico> consultarTecnicoSelecao(){
+	public String consultarTecnicoSelecao(String nomeSelecao){
 		
-		List<Tecnico> lista = null;
+		Tecnico tecnico = null;
+		selecaoDAO = new SelecaoDAOHibernate();
+		Selecao selecao = selecaoDAO.buscar(nomeSelecao);
+		tecnico = selecao.getTecnico();
 		
-		return lista;
+		return tecnico.getNome();
 	}
 	
 	//UserStory#16
@@ -91,17 +94,33 @@ public class Consultar {
 	}
 	
 	//UserStory#17
-	public List<Pais> listarPaisesCopa(){
+	public List<Pais> listarPaisesCopa(int ano){
 		
 		List<Pais> lista = null;
+		copaDAO = new CopaDAOHibernate();
+		Copa copa = copaDAO.buscar(ano);
+		for (int i = 0; i < copa.getSelecoes().size(); i++){
+			Pais pais = copa.getSelecoes().get(i).getPais();
+			lista.add(pais);
+		}
+		 ///// TO DO
 		
 		return lista;
 	}
 	
 	//UserStory#18
-	public String consultarPlacar(){
+	public String consultarPlacar(int ano, int id_jogo){
 		
 		String placar = null;
+		/*int golsSelecaoA, golsSelecaoB;
+		copaDAO = new CopaDAOHibernate();
+		Copa copa = copaDAO.buscar(ano);
+		List<Jogo> jogo = copa.getJogos();
+		for (int i = 0; i < jogo.size(); i++){
+			if (id_jogo == jogo.get(i).getId()){
+				
+			}
+		}*/
 		
 		return placar;
 	}
