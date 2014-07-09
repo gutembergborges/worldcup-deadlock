@@ -14,7 +14,14 @@ public class Cadastrar {
 	private GolDAOHibernate golDAO = null;
 	
 	//UserStory#01
-	public void cadastrarPais(){
+	public void cadastrarPais(String nome, String continente){
+		
+		Pais pais = new Pais();
+		pais.setNome(nome);
+		pais.setContinente(continente);
+		
+		paisDAO = new PaisDAOHibernate();
+		paisDAO.adicionar(pais);
 		
 	}
 	

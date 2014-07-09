@@ -1,4 +1,7 @@
-package model;
+package controller;
+
+import model.Pais;
+import model.PaisDAOHibernate;
 
 public class Teste {
 
