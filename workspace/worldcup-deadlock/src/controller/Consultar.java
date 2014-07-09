@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+
 import model.*;
 
 public class Consultar {
@@ -17,8 +18,8 @@ public class Consultar {
 	//UserStory#10
 	public List<Pais> listarTodosPaises(){
 		
-		List<Pais> lista = null;
-		
+		paisDAO = new PaisDAOHibernate();
+		List<Pais> lista = paisDAO.listar();
 		return lista;
 	}
 	
@@ -39,17 +40,26 @@ public class Consultar {
 	}
 	
 	//UserStory#13
-	public List<Selecao> listarTodasSelecoes(){
+	@SuppressWarnings("null")
+	public List<String> listarTodasSelecoes(){
 		
-		List<Selecao> lista = null;
-		
+		String selecao = null;
+		List<String> lista = null;
+		selecaoDAO = new SelecaoDAOHibernate();
+		for(int i = 0; i < selecaoDAO.listar().size(); i++){
+			selecao = new String(selecaoDAO.listar().get(i).getPais().getNome() + " de " + selecaoDAO.listar().get(i).getAno());
+			lista.add(selecao);
+		}
 		return lista;
 	}
 	
 	//UserStory#14
-	public List<Jogador> listarJogadoresSelecao(){
+	public List<Jogador> listarJogadoresSelecao(String nomeSelecao){
 		
 		List<Jogador> lista = null;
+		selecaoDAO = new SelecaoDAOHibernate();
+		Selecao selecao = selecaoDAO.buscar(nomeSelecao);
+		lista = selecao.getJogadores();
 		
 		return lista;
 	}

@@ -8,7 +8,6 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class HibernateUtil {
 	
 	private static SessionFactory sessionFactory = null;
-	
 	private static HibernateUtil instance = null;
 	
 	private HibernateUtil() {
@@ -31,11 +30,6 @@ public class HibernateUtil {
 	
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
-	}
-
-	public void zerarSistema() {
-		instance = null;
-		
 	}
 
 }

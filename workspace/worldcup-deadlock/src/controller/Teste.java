@@ -1,18 +1,25 @@
 package controller;
-
-import model.Pais;
-import model.PaisDAOHibernate;
+import java.util.List;
+import model.*;
 
 public class Teste {
 
 	public static void main(String[] args) {
 		
-		Pais pais = new Pais();
-		pais.setNome("Brasil");
-		pais.setContinente("America do Sul");
+		Cadastrar cadastro = new Cadastrar();
 		
-		PaisDAOHibernate paisHibernate = new PaisDAOHibernate();
-		paisHibernate.adicionar(pais);
+		//Teste cadastro de país
+		//cadastro.cadastrarPais("Holanda", "Europa");
+		//cadastro.cadastrarPais("Japão", "Ásia");
+		
+		//Teste consulta países cadastrados
+		Consultar consulta = new Consultar();
+		List<Pais> lista = consulta.listarTodosPaises();
+		System.out.println("Listando países cadastrados (" + lista.size() + "): ");
+		for(int i = 0; i < lista.size(); i++){
+			System.out.println(lista.get(i).getNome());
+		}
+		
 		
 	}
 
