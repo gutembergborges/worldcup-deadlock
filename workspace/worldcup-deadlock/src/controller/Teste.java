@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,16 +14,44 @@ import model.Posicao;
 import model.Selecao;
 import model.SelecaoDAOHibernate;
 
+import java.util.List;
+import model.*;
+
+
 public class Teste {
 
 	public static void main(String[] args) {
 		
+
 	//	Pais pais = new Pais();
 	//	pais.setNome("Brasil");
 	//	pais.setContinente("America do Sul");
+
+	//	Cadastrar cadastro = new Cadastrar();
+
 		
+
 	//	PaisDAOHibernate paisHibernate = new PaisDAOHibernate();
 	//	paisHibernate.adicionar(pais);
+
+		//Teste cadastro de país
+		//cadastro.cadastrarPais("Holanda", "Europa");
+		//cadastro.cadastrarPais("Japão", "Ásia");
+		
+	//	Cadastrar cadastro = new Cadastrar();
+	//	cadastro.cadastrarPais("Brasil", "America do Sul");
+	//	cadastro.cadastrarPais("Alemanha", "Europa");
+	//	cadastro.cadastrarPais("Japao", "Asia");
+		
+		//Teste consulta países cadastrados
+		Consultar consulta = new Consultar();
+		List<Pais> lista = consulta.listarTodosPaises();
+		System.out.println("Listando países cadastrados (" + lista.size() + "): ");
+		for(int i = 0; i < lista.size(); i++){
+			System.out.println(lista.get(i).getContinente());
+		}
+		
+
 		
 	//	Integer ano = 2002;
 		
@@ -34,11 +63,11 @@ public class Teste {
 		
 		boolean foiContra = false;
 		*/
-		Jogo jogo = new Jogo();
-		jogo.setLocal("Salvador");
+	//	Jogo jogo = new Jogo();
+	//	jogo.setLocal("Salvador");
 		
-		JogoDAOHibernate jogoDAO = new JogoDAOHibernate();
-		jogoDAO.adicionar(jogo);
+	//	JogoDAOHibernate jogoDAO = new JogoDAOHibernate();
+	//	jogoDAO.adicionar(jogo);
 		
 	/*	Jogador jogador = new Jogador();
 		

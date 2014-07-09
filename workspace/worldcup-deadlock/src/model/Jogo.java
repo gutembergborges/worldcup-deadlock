@@ -3,7 +3,6 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,8 +17,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-
 
 @Entity 
 @Table (name = "JOGO")
@@ -54,7 +51,7 @@ public class Jogo implements Serializable {
 	private List<Gol> gols;
 	
 	@Temporal(TemporalType.TIME)
-	private Date tempo; //Na dúvida se o tipo é Date do java.util mesmo
+	private Date data; //Na dúvida se o tipo é Date do java.util mesmo
 	
 	private String local;
 	
@@ -126,12 +123,12 @@ public class Jogo implements Serializable {
 		this.gols = gols;
 	}
 
-	public Date getTempo() {
-		return tempo;
+	public Date getData() {
+		return data;
 	}
 
-	public void setTempo(Date tempo) {
-		this.tempo = tempo;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	public String getLocal() {

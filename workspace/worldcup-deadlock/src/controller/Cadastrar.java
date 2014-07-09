@@ -2,6 +2,7 @@ package controller;
 
 
 
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -53,7 +54,16 @@ public class Cadastrar {
 	}
 	
 	//UserStory#04
-	public void cadastrarSelecao(){
+	public void cadastrarSelecao(Pais pais, Copa copa, List<Jogador> jogadores){
+		
+		Selecao selecao = new Selecao();
+		selecao.setAno(copa.getAno());
+		selecao.setPais(pais);
+		selecao.setCopa(copa);
+		selecao.setJogadores(jogadores);
+		
+		selecaoDAO = new SelecaoDAOHibernate();
+		selecaoDAO.adicionar(selecao);
 		
 	}
 	
@@ -76,7 +86,19 @@ public class Cadastrar {
 	}
 	
 	//UserStory#07
-	public void cadastrarJogo(){
+	public void cadastrarJogo(Copa copa, Selecao selecaoA, Selecao selecaoB, Escalacao escalacaoA, Escalacao escalacaoB, String local, Date data){
+		
+		Jogo jogo = new Jogo();
+		jogo.setCopa(copa);
+		jogo.setSelecaoA(selecaoA);
+		jogo.setSelecaoB(selecaoB);
+		jogo.setEscalacaoA(escalacaoA);
+		jogo.setEscalacaoB(escalacaoB);
+		jogo.setLocal(local);
+		jogo.setData(data);
+		
+		jogoDAO = new JogoDAOHibernate();
+		jogoDAO.adicionar(jogo);
 		
 	}
 	
