@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,7 +28,7 @@ public class Tecnico implements Serializable {
 	private String nome;
 	
 	@Temporal(TemporalType.DATE)
-	private Date data_nascimento;
+	private Calendar data_nascimento;
 
 	public Long getId() {
 		return id;
@@ -53,11 +54,11 @@ public class Tecnico implements Serializable {
 		this.nome = nome;
 	}
 
-	public Date getData_nascimento() {
+	public Calendar getData_nascimento() {
 		return data_nascimento;
 	}
 
-	public void setData_nascimento(Date data_nascimento) {
+	public void setData_nascimento(Calendar data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
 	

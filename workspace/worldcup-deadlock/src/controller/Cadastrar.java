@@ -1,5 +1,7 @@
 package controller;
 
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class Cadastrar {
 	private EscalacaoDAOHibernate escalacaoDAO = null;
 	private JogoDAOHibernate jogoDAO = null;
 	private GolDAOHibernate golDAO = null;
+	private SubstituicaoDAOHibernate substituicaoDAO = null;
 	
 	//UserStory#01
 	public void cadastrarPais(String nome, String continente){
@@ -34,7 +37,14 @@ public class Cadastrar {
 	}
 	
 	//UserStory#03
-	public void cadastrarTecnico(){
+	public void cadastrarTecnico(String nome, Calendar data_nascimento){
+		
+		Tecnico tecnico = new Tecnico();
+		tecnico.setNome(nome);
+		tecnico.setData_nascimento(data_nascimento);
+		
+		tecnicoDAO = new TecnicoDAOHibernate();
+		tecnicoDAO.adicionar(tecnico);
 		
 	}
 	
@@ -58,7 +68,11 @@ public class Cadastrar {
 	}
 	
 	//UserStory#06
-	public void cadastrarEscalacao(){
+	public void cadastrarEscalacao(List<Jogador> jogadores, Jogo jogo){
+				
+		Escalacao escalacao = new Escalacao();
+		escalacaoDAO = new EscalacaoDAOHibernate();
+		escalacaoDAO.adicionar(escalacao);
 		
 	}
 	
@@ -85,7 +99,17 @@ public class Cadastrar {
 	}
 	
 	//UserStory#09
-	public void cadastrarSubstituicao(){
+	public void cadastrarSubstituicao(Date tempo, Jogador jogadorSai, Jogador jogadorEntra){
+		
+		Substituicao substituicao = new Substituicao();
+		substituicao.setTempo(tempo);
+		
+		
+		substituicaoDAO = new SubstituicaoDAOHibernate();
+		substituicaoDAO.adicionar(substituicao);
+	
+		
+		
 		
 	}
 
