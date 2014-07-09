@@ -34,8 +34,9 @@ public class Consultar {
 	//UserStory#12
 	public List<Tecnico> listarTodosTecnicos(){
 		
-		List<Tecnico> lista = null;
-		
+		tecnicoDAO = new TecnicoDAOHibernate();
+		List<Tecnico> lista = tecnicoDAO.listar();
+	
 		return lista;
 	}
 	
@@ -73,11 +74,20 @@ public class Consultar {
 	}
 	
 	//UserStory#16
-	public List<Copa> listarTodasCopas(){
+	public List<String> listarTodasCopas(){
 		
-		List<Copa> lista = null;
-		
+		String copa = null;
+		List<String> lista = null;
+		copaDAO = new CopaDAOHibernate();
+		for(int i = 0; i < copaDAO.listar().size(); i++){
+			copa = new String("Copa do mundo de" + copaDAO.listar().get(i).getAno() + copaDAO.listar().get(i).getPais().getNome());
+			lista.add(copa);
+		}
 		return lista;
+		
+		
+		
+	
 	}
 	
 	//UserStory#17
@@ -97,11 +107,20 @@ public class Consultar {
 	}
 	
 	//UserStory#19
-	public List<Jogo> listarJogosCopa(){
+	public List<String> listarJogosCopa(){
 		
-		List<Jogo> lista = null;
-		
+		String jogosCopa = null;
+		List<String> lista = null;
+		jogoDAO = new JogoDAOHibernate();
+		for(int i = 0; i < jogoDAO.listar().size(); i++){
+			jogosCopa = new String(jogoDAO.listar().get(i).getSelecaoA() + " " + jogoDAO.listar().get(i).getSelecaoA().getGols()
+					+ " x " + jogoDAO.listar().get(i).getSelecaoB().getGols() + jogoDAO.listar().get(i).getSelecaoB());
+			lista.add(jogosCopa);
+		}
 		return lista;
+		
+		
+
 	}
 	
 	//UserStory#20
