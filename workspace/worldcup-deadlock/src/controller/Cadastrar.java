@@ -32,7 +32,18 @@ public class Cadastrar {
 	}
 	
 	//UserStory#02
-	public void cadastrarJogador(){
+	public void cadastrarJogador(Calendar calendar, String nome, Integer numero, Posicao posicao, Selecao selecao, List<Escalacao> escalacoes, List<Gol> gols){
+		Jogador jogador = new Jogador();
+		jogador.setData_nascimento(calendar);
+		jogador.setNome(nome);
+		jogador.setNumero(numero);
+		jogador.setPosicao(posicao);
+		jogador.setSelecao(selecao);
+		jogador.setEscalacoes(escalacoes);
+		jogador.setGols(gols);
+		
+		jogadorDAO = new JogadorDAOHibernate();
+		jogadorDAO.adicionar(jogador);
 		
 	}
 	
@@ -63,7 +74,15 @@ public class Cadastrar {
 	}
 	
 	//UserStory#05
-	public void cadastrarCopa(){
+	public void cadastrarCopa(Integer ano, Pais pais, List<Jogo> jogos, List<Selecao> selecoes){
+		Copa copa = new Copa();
+		copa.setAno(ano);
+		copa.setPais(pais);
+		copa.setJogos(jogos);
+		copa.setSelecoes(selecoes);
+		
+		copaDAO = new CopaDAOHibernate();
+		copaDAO.adicionar(copa);
 		
 	}
 	
@@ -94,7 +113,16 @@ public class Cadastrar {
 	}
 	
 	//UserStory#08
-	public void cadastrarGol(){
+	public void cadastrarGol(boolean foiContra, Jogador jogador, Jogo jogo, Selecao selecao, Date tempo){
+		Gol gol = new Gol();
+		gol.setFoiContra(foiContra);
+		gol.setJogador(jogador);
+		gol.setJogo(jogo);
+		gol.setSelecao(selecao);
+		gol.setTempo(tempo);
+		
+		golDAO = new GolDAOHibernate();
+		golDAO.adicionar(gol);
 		
 	}
 	
