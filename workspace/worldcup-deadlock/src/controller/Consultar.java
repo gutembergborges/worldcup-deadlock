@@ -511,7 +511,7 @@ public class Consultar {
 	}
 	
 	//UserStory#31
-	public List<String> consultarMediaIdadeCopa(int ano){
+	public List<String> consultarMediaIdadeCopa(Copa copa){
 		//Obs: retornar lista de strings onde cada string � referente a uma selecao da copa (a m�dia � de cada selecao da copa)
 		
 		List<String> lista = null;
