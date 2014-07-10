@@ -7,7 +7,7 @@ public class Teste {
 	public static void main(String[] args) {
 		
 		Cadastrar cadastro = new Cadastrar();
-		
+		cadastro.cadastrarPais("Brasil", "America do Sul");
 		//Teste cadastro de país
 		//cadastro.cadastrarPais("Holanda", "Europa");
 		//cadastro.cadastrarPais("Japão", "Ásia");
