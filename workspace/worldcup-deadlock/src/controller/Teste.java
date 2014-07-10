@@ -13,12 +13,12 @@ public class Teste {
 		//cadastro.cadastrarPais("Japão", "Ásia");
 		
 		//Teste consulta países cadastrados
-		Consultar consulta = new Consultar();
-		List<Pais> lista = consulta.listarTodosPaises();
-		System.out.println("Listando países cadastrados (" + lista.size() + "): ");
-		for(int i = 0; i < lista.size(); i++){
-			System.out.println(lista.get(i).getNome());
-		}
+		//Consultar consulta = new Consultar();
+		//List<Pais> lista = consulta.listarTodosPaises();
+	//	System.out.println("Listando países cadastrados (" + lista.size() + "): ");
+	//	for(int i = 0; i < lista.size(); i++){
+	//		System.out.println(lista.get(i).getNome());
+	//	}
 		
 		
 	}
