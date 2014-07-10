@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+
 import model.*;
 
 public class Consultar {
@@ -332,7 +333,7 @@ public class Consultar {
 	}
 	
 	//UserStory#26
-	@SuppressWarnings("null")
+	@SuppressWarnings({ "null", "unused" })
 	public List<Jogo> consultarJogoMaiorGoleada(){
 		
 		List<Jogo> jogosGoleada = null;
@@ -386,14 +387,21 @@ public class Consultar {
 						if(diferenca > maiorDiferenca){
 							maiorDiferenca = diferenca; //registra a nova maior diferenca
 							jogoGoleada = copas.get(i).getJogos().get(j); //guardo o jogo de maior goleada encontrado
-							jogosGoleada.clear();; //descarto uma possivel lista de jogos empatados com maior goleada, ja que achamos uma nova maior goleada
+							jogosGoleada = null; //descarto uma possivel lista de jogos empatados com maior goleada, ja que achamos uma nova maior goleada
 						}
 						
 						//Caso encontremos um jogo que tenha a mesma diferenca de gols que a maior diferenca registrada ate o momento...
 						else if(diferenca == maiorDiferenca){
-							jogosGoleada.add(jogoGoleada); //adiciono o jogo que tinha a maior goleada sozinho numa lista
-							jogosGoleada.add(copas.get(i).getJogos().get(j)); //adiciono o novo jogo encontrado
-							jogoGoleada = null; //anulo o objeto que guarda o jogo com maior goleada, pois agora temos uma lista de jogos e nï¿½o 1 jogo apenas
+							if(jogosGoleada != null){ //Se a lista nao esta vazia, significa que nao preciso adicionar o jogo anterior, pois ele ja esta la 
+								jogosGoleada.add(copas.get(i).getJogos().get(j)); 
+							}
+							
+							else{ //Se esta vazia, preciso colocar jogoGoleada na lista tambem pois ele esta empatado com o atual
+								jogosGoleada.add(jogoGoleada);
+								jogosGoleada.add(copas.get(i).getJogos().get(j));
+								jogosGoleada = null; //zero ele pq ja coloquei na lista
+							}
+							
 						}
 						
 					}	
@@ -405,7 +413,7 @@ public class Consultar {
 			jogosGoleada.add(jogoGoleada);
 			return jogosGoleada;
 		}
-		else if(!jogosGoleada.isEmpty()){
+		else if(jogosGoleada != null){
 			return jogosGoleada;
 		}
 		else{
@@ -487,12 +495,66 @@ public class Consultar {
 		return lista;
 	}
 	
-	//UserStory#30
-	public List<String> consultarArtilheirosGeral(Copa copa){
+	//UserStory#41 (Substitui a 30 pela 41)
+	@SuppressWarnings({ "unused", "null" })
+	public List<Jogador> consultarJogadorMaisGolsPartida(Jogo jogo){
 		
-		List<String> lista = null;
+		List<Jogador> jogadores = null;
+		Jogador jogadorMaisGols = null;
+		int maisGols = 0; //Armazena a maior quantidade de gols que um jogador fez na partida
 		
-		return lista;
+		for(int i = 0; i < jogo.getGols().size(); i++){
+					
+			//Pega o jogador que fez um dos gols
+			Jogador jogador_aux = jogo.getGols().get(i).getJogador();
+					
+			
+			int aux = 0; //conta quantos gols o jogador fez
+			//Faco outro laco e comparo com a lista de gols para saber se ele fez outros gols
+			for(int j = 0; j < jogo.getGols().size(); j++){
+							
+				//A cada vez que o autor do gol da lista eh o jogador em questao, o contador dele é incrementado
+				if(jogo.getGols().get(j).getJogador().getId() == jogador_aux.getId()){
+					aux++;
+				}
+						
+			}
+					
+			//Agora comparo se a quantidade de gols que ele fez é a maior ou igual a detectada ate agora no jogo
+			if(aux > maisGols){ //Se for maior...
+				maisGols = aux; //...a variavel maisGols é atualizada
+				jogadorMaisGols =  jogador_aux; //guardo o jogador que fez mais gols
+				jogadores = null; //... e zero uma possivel lista de jogadores que estavam empatados
+			}	
+			
+			//Se for igual...
+			else if(aux == maisGols){
+				
+				//Adiciono os jogadores empatados na lista
+				if(jogadores != null){ //Se a lista nao esta vazia, significa que nao preciso adicionar o jogador anterior, pois ele ja esta la 
+					jogadores.add(jogador_aux); 
+				}
+				
+				else{ //Se esta vazia, preciso colocar o jogadorMaisGols na lista tambem pois ele esta empatado com o atual
+					jogadores.add(jogadorMaisGols);
+					jogadores.add(jogador_aux);
+					jogadorMaisGols = null; //zero ele pq ja coloquei na lista
+				}
+				
+			}
+			
+		} //O processo se repete ate que todos os gols da lista sejam analisados		
+			
+		if(jogadorMaisGols != null){
+			jogadores.add(jogadorMaisGols);
+			return jogadores;
+		}
+		else if(jogadores != null){
+			return jogadores;
+		}
+		else{
+			return null;
+		}
 	}
 	
 	//UserStory#31
