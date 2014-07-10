@@ -506,10 +506,51 @@ public class Consultar {
 	
 	//UserStory#32
 	public List<String> consultarFinais(){
+	 		
+		copaDAO = new CopaDAOHibernate();
+		List<Copa> copa = copaDAO.listar();
 		
+		List <Integer> jogo_final = null; //copa.size() - 1;
+		List <Jogo> jogo = null;
+		
+		for (int i = 0; i < copa.size(); i++){
+			
+			jogo = copa.get(i).getJogos();
+			jogo_final.add(jogo.size());
+			
+		}
+
+		String selecaoA = null;
+		String selecaoB = null;
+
+		int golsSelecaoA = 0;
+		int golsSelecaoB = 0;
+
+		String final_copa = null;
+
 		List<String> lista = null;
+
+
+		for(int i = 0; i < copa.size(); i++){
+
+			selecaoA = copa.get(i).getJogos().get(jogo_final.get(i)).getSelecaoA().getPais().getNome();		
+			selecaoB = copa.get(i).getJogos().get(jogo_final.get(i)).getSelecaoB().getPais().getNome();
+			
+			golsSelecaoA = copa.get(i).getJogos().get(jogo_final.get(i)).getSelecaoA().getGols().size();
+			golsSelecaoB = copa.get(i).getJogos().get(jogo_final.get(i)).getSelecaoB().getGols().size();
+
+			final_copa = "Final: " + selecaoA + " x " + selecaoB + " - Placar: " + golsSelecaoA + " x " + golsSelecaoB;
+
+			lista.add(final_copa);
+
+		}
+
+
 		
-		return lista;
+	 		
+	 	return lista;
+	 
+
 	}
 	
 	//UserStory#33
