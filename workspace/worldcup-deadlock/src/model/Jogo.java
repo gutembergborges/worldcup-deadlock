@@ -50,6 +50,9 @@ public class Jogo implements Serializable {
 	@OneToMany(mappedBy = "jogo")
 	private List<Gol> gols;
 	
+	@OneToMany(mappedBy = "jogo")
+	private List<Substituicao> substituicoes;
+	
 	@Temporal(TemporalType.TIME)
 	private Date data; //Na dúvida se o tipo é Date do java.util mesmo
 	
