@@ -1,7 +1,22 @@
 package controller;
 
 import java.util.List;
-import model.*;
+
+import model.Copa;
+import model.CopaDAOHibernate;
+import model.EscalacaoDAOHibernate;
+import model.GolDAOHibernate;
+import model.Jogador;
+import model.JogadorDAOHibernate;
+import model.Jogo;
+import model.JogoDAOHibernate;
+import model.Pais;
+import model.PaisDAOHibernate;
+import model.Selecao;
+import model.SelecaoDAOHibernate;
+import model.Substituicao;
+import model.Tecnico;
+import model.TecnicoDAOHibernate;
 
 public class Consultar {
 	
@@ -325,7 +340,7 @@ public class Consultar {
 			
 			int media = qntGols/qntJogos;
 			
-			resultado = new String ("Total de gols:" + qntGols + "M�dia de gols por partida:" + media );
+			resultado = new String ("Total de gols:" + qntGols + "Média de gols por partida:" + media );
 		
 				
 		return resultado;
@@ -496,7 +511,7 @@ public class Consultar {
 	}
 	
 	//UserStory#31
-	public List<String> consultarMediaIdadeCopa(Copa copa){
+	public List<String> consultarMediaIdadeCopa(int ano){
 		//Obs: retornar lista de strings onde cada string � referente a uma selecao da copa (a m�dia � de cada selecao da copa)
 		
 		List<String> lista = null;
@@ -554,9 +569,25 @@ public class Consultar {
 	}
 	
 	//UserStory#33
-	public List<Tecnico> consultarTecnicosCampeoes(){
+	public List<String> consultarTecnicosCampeoes(){
 		
-		List<Tecnico> lista = null;
+		// List<Tecnico> lista = null;
+		String tecnicoCampeao = null;
+		List<String> lista = null;
+		
+		selecaoDAO = new SelecaoDAOHibernate();
+		List<Selecao> selecao = selecaoDAO.listar();
+			
+		for(int i = 0; i < selecao.size(); i++){
+			
+			if(selecao.get(i).getPosicao() == 1){
+				
+				tecnicoCampeao = new String(selecao.get(i).getTecnico().getNome());
+				lista.add(tecnicoCampeao);
+				
+			}
+			
+		}
 		
 		return lista;
 	}
@@ -590,7 +621,19 @@ public class Consultar {
 		
 		int quantidade = 0;
 		
+		selecaoDAO = new SelecaoDAOHibernate();
+		List<Selecao> selecao = selecaoDAO.listar();
+		
+		for(int i = 0; i < selecao.size(); i++){
+			
+			if(selecao.get(i).getPais() == pais){
+				quantidade ++;
+			}
+				
+		}
+		
 		return quantidade;
+		
 	}
 	
 	//UserStory#38
