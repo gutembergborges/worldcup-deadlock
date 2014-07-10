@@ -205,12 +205,28 @@ public class Consultar {
 	}
 	
 	//UserStory#22
-	public List<Gol> listarGolsJogo(){
+	public List<String> listarGolsJogo(Jogo jogo){
 		
-		List<Gol> lista = null;
+		
+		String golsJogo = null;
+		List<String> lista = null;
+		golDAO = new GolDAOHibernate();
+		
+		
+		for(int i = 0; i < golDAO.listar().size(); i++){
+			//if (jogo.getId() == 1) {
+			
+				golsJogo = new String("Gol" + golDAO.listar().get(i).getSelecao() + "," + golDAO.listar().get(i).getTempo()+ "," 
+				+ golDAO.listar().get(i).getJogador()+ "," + golDAO.listar().get(i).getFoiContra());
+					
+			lista.add(golsJogo	);
+			
+			}
 		
 		return lista;
+		
 	}
+		
 	
 	//UserStory#23
 	public List<Object> consultarCaracteristicaJogadorCopa(int ano, String pais, String nome_jogador){
@@ -282,11 +298,37 @@ public class Consultar {
 	}
 	
 	//UserStory#25
-	public int consultarQuantGolsCopa(){
+	public String consultarQuantGolsCopa(int ano){
 		
-		int qnt = 0;
+		String resultado = null;
+		int qntGols = 0;
+		int qntJogos = 0;
+		copaDAO = new CopaDAOHibernate();
+		Copa copa = null;
+		Jogo jogo = null;
+	
 		
-		return qnt;
+			for (int i = 0; i < copaDAO.listar().size(); i++){
+					if (ano == copaDAO.listar().get(i).getAno()){
+						copa = copaDAO.listar().get(i);
+					}
+			}
+					
+			for (int i = 0; i < copa.getJogos().size(); i++){
+							
+					qntGols = copa.getSelecoes().get(i).getGols().size();
+					
+					
+			}	
+			
+			qntJogos = copa.getJogos().size();
+			
+			int media = qntGols/qntJogos;
+			
+			resultado = new String ("Total de gols:" + qntGols + "Média de gols por partida:" + media );
+		
+				
+		return resultado;
 	}
 	
 	//UserStory#26
