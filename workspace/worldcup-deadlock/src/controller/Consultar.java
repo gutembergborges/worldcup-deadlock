@@ -624,9 +624,32 @@ public class Consultar {
 	}
 	
 	//UserStory#34
+	@SuppressWarnings("null")
 	public List<String> consultarGolsContra(){
 		
 		List<String> lista = null;
+		List<Gol> golsContra = null;
+		copaDAO = new CopaDAOHibernate();
+		
+		//Coloca todos os gols contra de todas as copas em uma lista
+		for(int i = 0; i < copaDAO.listar().size(); i++){
+			for(int j = 0; j < copaDAO.listar().get(i).getJogos().size(); j++){
+				for(int k = 0; k < copaDAO.listar().get(i).getJogos().get(j).getGols().size(); k++){
+					if(copaDAO.listar().get(i).getJogos().get(j).getGols().get(k).getFoiContra()){
+						golsContra.add(copaDAO.listar().get(i).getJogos().get(j).getGols().get(k));
+					}
+				}
+			}
+		}
+		
+		//Monta a lista informando edicao, jogador e tempo
+		for(int i = 0; i < golsContra.size(); i++){
+			String edicao = new String(golsContra.get(i).getJogo().getCopa().getPais().getNome() + " " + golsContra.get(i).getJogo().getCopa().getAno().toString());
+			String jogador = new String(golsContra.get(i).getJogador().getNome());
+			String tempo = new String(golsContra.get(i).getTempo().toString());
+			
+			lista.add(edicao + ", " + jogador + ", " + tempo);
+		}
 		
 		return lista;
 	}
@@ -655,12 +678,64 @@ public class Consultar {
 		return quantidade;
 	}
 	
-	//UserStory#38
-	public List<String> listarPaisesMaisParticipacoes(){
+	//UserStory#47 (Substitui a 38 pela 47)
+	@SuppressWarnings({ "null", "unused" })
+	public List<Pais> listarPaiseMaisParticipouFinal(){
 		
-		List<String> lista = null;
+		List<Pais> lista = null;
+		Pais paisMaior = null;
+		int contMaior = 0; //armazenara a maior qnt de vezes
+		copaDAO = new CopaDAOHibernate();
+		paisDAO = new PaisDAOHibernate();
 		
-		return lista;
+		for(int i = 0; i < paisDAO.listar().size(); i++){
+			int qnt = 0; //Vai armazenar a quantidade de finais de paisDAO.listar().get(i)
+			//Varre todos as copas...
+			for(int j = 0; j < copaDAO.listar().size(); j++){
+				//Varre todos os jogos da copa em questao...
+				for(int k = 0; k < copaDAO.listar().get(j).getJogos().size(); k++){
+					//Se o jogo for uma final...
+					if(copaDAO.listar().get(j).getJogos().get(k).getFase() == Fase.FINAL){
+						//Verifica se a selecaoA do jogo é do pais em questao...
+						if(copaDAO.listar().get(j).getJogos().get(k).getSelecaoA().getPais().getId() == paisDAO.listar().get(i).getId()){
+							qnt++;
+						}
+						//Verifica se a selecaoB do jogo é do pais em questao...
+						else if(copaDAO.listar().get(j).getJogos().get(k).getSelecaoB().getPais().getId() == paisDAO.listar().get(i).getId()){
+							qnt++;
+						}
+					}
+				}
+			}
+			//Agora que todas as copas foram verificadas, comparar se a quantidade de finais do paisDAO.listar().get(i) é a maior de todas
+			if(qnt > contMaior){
+				paisMaior = paisDAO.listar().get(i);
+				if(lista != null){
+					lista = null;
+				}
+			}
+			else if(qnt == contMaior){
+				//Se não existir lista de paises, adiciona-se o pais que era o unico campeao e o novo pais na lista
+				if(lista == null){
+					lista.add(paisMaior);
+					lista.add(paisDAO.listar().get(i));
+					paisMaior = null;
+				}
+				//Se uma lista ja existia, apenas adiciona o novo pais
+				else{
+					lista.add(paisDAO.listar().get(i));
+				}
+			}
+		}
+		
+		//Caso não haja uma lista, adiciona o pais vencedor em uma lista e retorna uma lista de tamanho 1
+		if(lista == null){
+			lista.add(paisMaior);
+			return lista;
+		}
+		else{
+			return lista;
+		}
 	}
 	
 	//UserStory#39
