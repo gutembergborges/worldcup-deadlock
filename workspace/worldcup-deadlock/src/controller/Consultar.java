@@ -1,10 +1,23 @@
 package controller;
 
 
-import java.util.Date;
 import java.util.List;
 
-import model.*;
+import model.Copa;
+import model.CopaDAOHibernate;
+import model.EscalacaoDAOHibernate;
+import model.GolDAOHibernate;
+import model.Jogador;
+import model.JogadorDAOHibernate;
+import model.Jogo;
+import model.JogoDAOHibernate;
+import model.Pais;
+import model.PaisDAOHibernate;
+import model.Selecao;
+import model.SelecaoDAOHibernate;
+import model.Substituicao;
+import model.Tecnico;
+import model.TecnicoDAOHibernate;
 
 public class Consultar {
 	
@@ -13,8 +26,8 @@ public class Consultar {
 	private TecnicoDAOHibernate tecnicoDAO = null;
 	private SelecaoDAOHibernate selecaoDAO = null;
 	private CopaDAOHibernate copaDAO = null;
-	private EscalacaoDAOHibernate escalacaoDAO = null;
-	private JogoDAOHibernate jogoDAO = null;
+	private final EscalacaoDAOHibernate escalacaoDAO = null;
+	private final JogoDAOHibernate jogoDAO = null;
 	private GolDAOHibernate golDAO = null;
 	
 	//UserStory#10
@@ -135,15 +148,18 @@ public class Consultar {
 	}
 	
 	//UserStory#19
-	public List<String> listarJogosCopa(){
+	public List<String> listarJogosCopa(int ano){
 		
 		String jogosCopa = null;
 		List<String> lista = null;
-		jogoDAO = new JogoDAOHibernate();
 		
-		for(int i = 0; i < jogoDAO.listar().size(); i++){
-			jogosCopa = new String(jogoDAO.listar().get(i).getSelecaoA() + " " + jogoDAO.listar().get(i).getSelecaoA().getGols()
-					+ " x " + jogoDAO.listar().get(i).getSelecaoB().getGols() + jogoDAO.listar().get(i).getSelecaoB());
+		copaDAO = new CopaDAOHibernate();
+		Copa copa = copaDAO.buscar(ano);
+		List<Jogo> jogo = copa.getJogos(); 
+		
+		for(int i = 0; i < jogo.size(); i++){
+			jogosCopa = new String(jogo.get(i).getSelecaoA().getPais().getNome() + " " + jogo.get(i).getSelecaoA().getGols().size()
+					+ "x" + jogo.get(i).getSelecaoB().getGols().size() + jogo.get(i).getSelecaoB().getPais().getNome());
 			lista.add(jogosCopa);
 		}
 		
@@ -325,7 +341,7 @@ public class Consultar {
 			
 			int media = qntGols/qntJogos;
 			
-			resultado = new String ("Total de gols:" + qntGols + "Média de gols por partida:" + media );
+			resultado = new String ("Total de gols:" + qntGols + "Mï¿½dia de gols por partida:" + media );
 		
 				
 		return resultado;
@@ -393,7 +409,7 @@ public class Consultar {
 						else if(diferenca == maiorDiferenca){
 							jogosGoleada.add(jogoGoleada); //adiciono o jogo que tinha a maior goleada sozinho numa lista
 							jogosGoleada.add(copas.get(i).getJogos().get(j)); //adiciono o novo jogo encontrado
-							jogoGoleada = null; //anulo o objeto que guarda o jogo com maior goleada, pois agora temos uma lista de jogos e não 1 jogo apenas
+							jogoGoleada = null; //anulo o objeto que guarda o jogo com maior goleada, pois agora temos uma lista de jogos e nï¿½o 1 jogo apenas
 						}
 						
 					}	
@@ -414,9 +430,27 @@ public class Consultar {
 	}
 	
 	//UserStory#27
-	public List<Jogo> listarJogosEmpatadosCopa(){
+	public List<String> listarJogosEmpatadosCopa(int ano){
 		
-		List<Jogo> lista = null;
+		// List<Jogo> lista = null;
+		
+		String jogoEmpatado = null;
+		List<String> lista = null;
+		
+		copaDAO = new CopaDAOHibernate();
+		Copa copa = copaDAO.buscar(ano);
+		List<Jogo> jogo = copa.getJogos();
+			
+		for(int i = 0; i < jogo.size(); i++){
+			
+			if(jogo.get(i).getSelecaoA().getGols().size() == jogo.get(i).getSelecaoB().getGols().size()){
+				
+				jogoEmpatado = new String(jogo.get(i).getSelecaoA().getPais().getNome() + " " + jogo.get(i).getSelecaoA().getGols().size()
+						+ " x " + jogo.get(i).getSelecaoB().getGols().size() + jogo.get(i).getSelecaoB().getPais().getNome());
+				lista.add(jogoEmpatado);
+				
+			}
+		}
 		
 		return lista;
 	}
@@ -479,7 +513,7 @@ public class Consultar {
 	
 	//UserStory#31
 	public List<String> consultarMediaIdadeCopa(Copa copa){
-		//Obs: retornar lista de strings onde cada string é referente a uma selecao da copa (a média é de cada selecao da copa)
+		//Obs: retornar lista de strings onde cada string ï¿½ referente a uma selecao da copa (a mï¿½dia ï¿½ de cada selecao da copa)
 		
 		List<String> lista = null;
 		
