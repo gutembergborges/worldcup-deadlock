@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Date;
 import java.util.List;
 
 import model.*;
@@ -109,18 +110,22 @@ public class Consultar {
 	}
 	
 	//UserStory#18
-	public String consultarPlacar(int ano, int id_jogo){
+	public String consultarPlacar(int ano, String selecaoA, String selecaoB){
 		
 		String placar = null;
-		/*int golsSelecaoA, golsSelecaoB;
+		int golsSelecaoA = 0;
+		int golsSelecaoB = 0;
 		copaDAO = new CopaDAOHibernate();
 		Copa copa = copaDAO.buscar(ano);
 		List<Jogo> jogo = copa.getJogos();
 		for (int i = 0; i < jogo.size(); i++){
-			if (id_jogo == jogo.get(i).getId()){
-				
+			if (selecaoA.equals(jogo.get(i).getSelecaoA().getPais().getNome()) && selecaoB.equals(jogo.get(i).getSelecaoB().getPais())){
+				golsSelecaoA = jogo.get(i).getSelecaoA().getGols().size();
+				golsSelecaoB = jogo.get(i).getSelecaoB().getGols().size();
 			}
-		}*/
+		}
+		
+		placar = golsSelecaoA + "x" + golsSelecaoB;
 		
 		return placar;
 	}
@@ -151,9 +156,22 @@ public class Consultar {
 	}
 	
 	//UserStory#21
-	public List<Substituicao> listarSubstituicoesJogo(){
+	public List<Substituicao> listarSubstituicoesJogo(int ano, String selecaoA, String selecaoB){
+		
+		copaDAO = new CopaDAOHibernate();
+		Copa copa = copaDAO.buscar(ano);
+		Jogo jogo = null;
+		for (int i = 0; i < copa.getJogos().size(); i++){
+			if (selecaoA.equals(copa.getJogos().get(i).getSelecaoA().getPais().getNome()) && selecaoB.equals(copa.getJogos().get(i).getSelecaoB().getPais().getNome())){
+				jogo = copa.getJogos().get(i);
+			}
+		}
 		
 		List<Substituicao> lista = null;
+		
+		for (int i = 0; i < jogo.getSubstituicoes().size(); i++){
+			lista.add(jogo.getSubstituicoes().get(i));
+		}		
 		
 		return lista;
 	}
@@ -167,17 +185,70 @@ public class Consultar {
 	}
 	
 	//UserStory#23
-	public String consultarCaracteristicaJogadorCopa(){
+	public List<Object> consultarCaracteristicaJogadorCopa(int ano, String pais, String nome_jogador){
 		
-		String caracteristica = null;
+		copaDAO = new CopaDAOHibernate();
+		Copa copa = null;
+		List<Jogador> jogador = null;
+		Jogador player = null;
+		List<Object> caracteristicas = null;
 		
-		return caracteristica;
+		for (int i = 0; i < copaDAO.listar().size(); i++){
+			if (ano == copaDAO.listar().get(i).getAno()){
+				copa = copaDAO.listar().get(i);
+			}
+		}
+		
+		for (int i = 0; i < copa.getSelecoes().size(); i++){
+			if (pais.equals(copa.getSelecoes().get(i).getPais().getNome())){
+				jogador = copa.getSelecoes().get(i).getJogadores();
+			}
+		}
+		
+		for (int i = 0; i < jogador.size(); i++){
+			if (nome_jogador.equals(jogador.get(i).getNome())){
+				player = jogador.get(i);
+			}
+		}
+		
+		caracteristicas.add(player.getData_nascimento());
+		caracteristicas.add(player.getNome());
+		caracteristicas.add(player.getNumero());
+		caracteristicas.add(player.getPosicao());
+		caracteristicas.add(player.getSelecao());
+		
+		//String caracteristica = null;
+		
+		return caracteristicas;
 	}
 	
 	//UserStory#24
-	public int consultarQuantJogosSelecao(){
+	public int consultarQuantJogosSelecao(String pais){
 		
 		int qnt = 0;
+		
+		copaDAO = new CopaDAOHibernate();
+		List<Copa> copa = copaDAO.listar(); 
+		
+		for (int i = 0; i < copa.size(); i++){
+			
+			for (int j = 0; j < copa.get(i).getSelecoes().size(); j++){
+				
+				if (pais.equals(copa.get(i).getSelecoes().get(j).getPais().getNome())){
+					
+					for (int k = 0; k < copa.get(i).getJogos().size(); k++){
+						if (pais.equals(copa.get(i).getJogos().get(k).getSelecaoA().getPais().getNome()) || pais.equals(copa.get(i).getJogos().get(k).getSelecaoB().getPais().getNome())){
+							
+							qnt = qnt + 1;
+									
+						}
+					}
+					
+				}
+				
+			}
+							
+		}
 		
 		return qnt;
 	}
@@ -207,11 +278,43 @@ public class Consultar {
 	}
 	
 	//UserStory#28
-	public List<Jogo> listarJogosGoleadas(){
+	public List<String> listarJogosGoleadas(){
 		
-		List<Jogo> lista = null;
+		//List<Jogo> lista = null;
 		
-		return lista;
+		copaDAO = new CopaDAOHibernate();
+		List<Copa> copa = copaDAO.listar();
+		List<Jogo> jogo = null;
+		int vantagem = 0;
+		String jogo_edicao = null;
+		List<String> lista_string = null;
+		
+		for (int i = 0; i < copa.size(); i++){
+			
+			jogo = copa.get(i).getJogos();
+			
+			for (int j = 0; j < jogo.size(); j++){
+				
+				int golsSelecaoA = jogo.get(j).getSelecaoA().getGols().size();
+				int golsSelecaoB = jogo.get(j).getSelecaoB().getGols().size();
+				
+				vantagem = golsSelecaoA - golsSelecaoB;
+				
+				if (vantagem >= 3 || vantagem <= -3){
+				
+					//lista.add(jogo.get(j));
+					
+					jogo_edicao = jogo.get(j).getSelecaoA().getPais().getNome() + " x " + jogo.get(j).getSelecaoB().getPais().getNome() + " - Copa de " + copa.get(i).getAno();
+					
+					lista_string.add(jogo_edicao);
+					
+				}
+				
+			}
+			
+		}
+		
+		return lista_string;
 	}
 
 }

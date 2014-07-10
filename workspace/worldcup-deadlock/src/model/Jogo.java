@@ -59,6 +59,17 @@ public class Jogo implements Serializable {
 	@Column (name="FASE")
 	private Fase fase;
 	
+	@OneToMany(mappedBy = "jogo")
+	private List<Substituicao> substituicoes;
+	
+	public List<Substituicao> getSubstituicoes(){
+		return substituicoes;
+	}
+	
+	public void setSubstituicoes(List<Substituicao> substituicoes){
+		this.substituicoes = substituicoes;
+	}
+	
 	public Fase getFase() {
 		return fase;
 	}
