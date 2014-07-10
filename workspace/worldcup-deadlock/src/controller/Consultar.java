@@ -1,23 +1,7 @@
 package controller;
 
-
 import java.util.List;
-
-import model.Copa;
-import model.CopaDAOHibernate;
-import model.EscalacaoDAOHibernate;
-import model.GolDAOHibernate;
-import model.Jogador;
-import model.JogadorDAOHibernate;
-import model.Jogo;
-import model.JogoDAOHibernate;
-import model.Pais;
-import model.PaisDAOHibernate;
-import model.Selecao;
-import model.SelecaoDAOHibernate;
-import model.Substituicao;
-import model.Tecnico;
-import model.TecnicoDAOHibernate;
+import model.*;
 
 public class Consultar {
 	
@@ -522,6 +506,70 @@ public class Consultar {
 	
 	//UserStory#32
 	public List<String> consultarFinais(){
+		
+		List<String> lista = null;
+		
+		return lista;
+	}
+	
+	//UserStory#33
+	public List<Tecnico> consultarTecnicosCampeoes(){
+		
+		List<Tecnico> lista = null;
+		
+		return lista;
+	}
+	
+	//UserStory#34
+	public List<String> consultarGolsContra(){
+		
+		List<String> lista = null;
+		
+		return lista;
+	}
+	
+	//UserStory#35
+	public List<String> consultarPaisesSedeCampeao(){
+		
+		List<String> lista = null;
+		
+		return lista;
+	}
+	
+	//UserStory#36
+	public List<String> consultarPaisesMaisTitulos(){
+		
+		List<String> lista = null;
+		
+		return lista;
+	}
+	
+	//UserStory#37
+	public int consultarQntParticipacoesCopa(Pais pais){
+		
+		int quantidade = 0;
+		
+		return quantidade;
+	}
+	
+	//UserStory#38
+	public List<String> listarPaisesMaisParticipacoes(){
+		
+		List<String> lista = null;
+		
+		return lista;
+	}
+	
+	//UserStory#39
+	public List<String> consultarMaioresVice(){
+		
+		List<String> lista = null;
+		
+		return lista;
+	}
+	
+	//UserStory#40
+	public List<String> consultarPaisesMaisDerrotados(){
 		
 		List<String> lista = null;
 		
