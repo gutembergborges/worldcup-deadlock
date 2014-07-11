@@ -864,13 +864,53 @@ public class Consultar {
   		}
   	}
   	
-  	//UserStory#39
-  	public List<String> consultarMaioresVice(){
-  		
-  		List<String> lista = null;
-  		
-  		return lista;
-  	}
+  //UserStory#39
+	public List<String> consultarMaioresVice() {
+
+		List<String> lista = null;
+		copaDAO = new CopaDAOHibernate();
+		paisDAO = new PaisDAOHibernate();
+		int maior = 0;
+
+		// Varre lista de paises...
+		for (int i = 0; i < paisDAO.listar().size(); i++) {
+			int qntVice = 0; // variavel que armazena a quantidade de vezes que
+								// um pais foi vice campeao
+			// Varre lista de copas...
+			for (int j = 0; j < copaDAO.listar().size(); j++) {
+				// Varre lista de selecoes da copa...
+				for (int k = 0; k < copaDAO.listar().get(j).getSelecoes()
+						.size(); k++) {
+					// Verifica se a selecao ficou em segundo lugar...
+					if (copaDAO.listar().get(j).getSelecoes().get(k)
+							.getPosicao() == 2) {
+						// Se a selecao que ficou em vice e do pais em
+						// questao...
+						if (copaDAO.listar().get(j).getSelecoes().get(k)
+								.getPais().getId() == paisDAO.listar().get(i)
+								.getId()) {
+							qntVice++; // Incrementa contador de vice
+						}
+					}
+				}
+			}
+
+			// Agora verificamos se a quantidade de vice do ultimo pais
+			// verificado eh a maior de todas (ou igual)
+			if (qntVice > maior) {
+				if (lista == null) {
+					lista.add(paisDAO.listar().get(i).getNome());
+				} else {
+					lista.clear();
+					lista.add(paisDAO.listar().get(i).getNome());
+				}
+			} else if (qntVice == maior) {
+				lista.add(paisDAO.listar().get(i).getNome());
+			}
+		}
+
+		return lista;
+	}
   	
   //UserStory#43 (Substitui a 40 pela 43)
   	public List<String> listarJogadoresMaisJogos(){
