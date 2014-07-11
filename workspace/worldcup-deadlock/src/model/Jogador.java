@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class Jogador implements Serializable{
 	private String nome;
 	
 	@Temporal(TemporalType.DATE)
-	private Calendar data_nascimento;
+	private Date data_nascimento;
 	
 	private Integer numero;
 	
@@ -84,12 +83,12 @@ public class Jogador implements Serializable{
 		this.nome = nome;
 	}
 
-	public Calendar getData_nascimento() {
+	public Date getDataNascimento() {
 		return data_nascimento;
 	}
 
-	public void setData_nascimento(Calendar calendar) {
-		this.data_nascimento = calendar;
+	public void setData_nascimento(Date data) {
+		this.data_nascimento = data;
 	}
 
 	public Integer getNumero() {

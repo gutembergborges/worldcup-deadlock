@@ -1,7 +1,6 @@
 package controller;
 
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -32,9 +31,9 @@ public class Cadastrar {
 	}
 	
 	//UserStory#02
-	public void cadastrarJogador(Calendar calendar, String nome, Integer numero, Posicao posicao, Selecao selecao, List<Escalacao> escalacoes, List<Gol> gols){
+	public void cadastrarJogador(Date data, String nome, Integer numero, Posicao posicao, Selecao selecao, List<Escalacao> escalacoes, List<Gol> gols){
 		Jogador jogador = new Jogador();
-		jogador.setData_nascimento(calendar);
+		jogador.setData_nascimento(data);
 		jogador.setNome(nome);
 		jogador.setNumero(numero);
 		jogador.setPosicao(posicao);
@@ -48,7 +47,7 @@ public class Cadastrar {
 	}
 	
 	//UserStory#03
-	public void cadastrarTecnico(String nome, Calendar data_nascimento){
+	public void cadastrarTecnico(String nome, Date data_nascimento){
 		
 		Tecnico tecnico = new Tecnico();
 		tecnico.setNome(nome);

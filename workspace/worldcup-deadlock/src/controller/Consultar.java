@@ -256,7 +256,7 @@ public class Consultar {
   			}
   		}
   		
-  		caracteristicas.add(player.getData_nascimento());
+  		caracteristicas.add(player.getDataNascimento());
   		caracteristicas.add(player.getNome());
   		caracteristicas.add(player.getNumero());
   		caracteristicas.add(player.getPosicao());
@@ -557,11 +557,35 @@ public class Consultar {
   		}
   	}
   	
-  	//UserStory#31
-  	public List<String> consultarMediaIdadeCopa(Copa copa){
-  		//Obs: retornar lista de strings onde cada string é referente a uma selecao da copa (a média é de cada selecao da copa)
+  //UserStory#31
+  	@SuppressWarnings("deprecation")
+  	public List<String> consultarMediaIdadeCopa(int ano){
+  				
+  		List<String> lista = null; //cada string contera o nome da selecao e a media de idade. ex: "BRASIL: 25 anos."
+  		copaDAO = new CopaDAOHibernate();
   		
-  		List<String> lista = null;
+  		for(int i = 0; i < copaDAO.listar().size(); i++){
+  			
+  			if(copaDAO.listar().get(i).getAno() == ano){
+  				
+  				for(int j = 0; j < copaDAO.listar().get(i).getSelecoes().size(); j++){
+  					
+  					int media = 0;
+  					int soma = 0;
+  					int qntJogadores = copaDAO.listar().get(i).getSelecoes().get(j).getJogadores().size();
+  					
+  					for(int k = 0; k < copaDAO.listar().get(i).getSelecoes().get(j).getJogadores().size(); k++){
+  						int idade = ano - copaDAO.listar().get(i).getSelecoes().get(j).getJogadores().get(k).getDataNascimento().getYear();
+  						soma = soma + idade;
+  					}
+  					
+  					media = soma/qntJogadores;
+  					String texto = new String(copaDAO.listar().get(i).getSelecoes().get(j).getPais().getNome() + ": " + media + " anos.");
+  					lista.add(texto);
+  				}
+  				
+  			}
+  		}
   		
   		return lista;
   	}
@@ -615,13 +639,29 @@ public class Consultar {
   
   	}
   	
-  	//UserStory#33
-  	public List<Tecnico> consultarTecnicosCampeoes(){
-  		
-  		List<Tecnico> lista = null;
-  		
-  		return lista;
-  	}
+  //UserStory#33
+   	public List<String> consultarTecnicosCampeoes(){
+   		
+   		// List<Tecnico> lista = null;
+   		String tecnicoCampeao = null;
+   		List<String> lista = null;
+   		
+   		selecaoDAO = new SelecaoDAOHibernate();
+   		List<Selecao> selecao = selecaoDAO.listar();
+   			
+   		for(int i = 0; i < selecao.size(); i++){
+   			
+   			if(selecao.get(i).getPosicao() == 1){
+   				
+   				tecnicoCampeao = new String(selecao.get(i).getTecnico().getNome());
+   				lista.add(tecnicoCampeao);
+   				
+   			}
+   			
+   		}
+   		
+   		return lista;
+   	}
   	
   	//UserStory#34
   	@SuppressWarnings("null")
@@ -654,28 +694,114 @@ public class Consultar {
   		return lista;
   	}
   	
-  	//UserStory#35
+  //UserStory#35
   	public List<String> consultarPaisesSedeCampeao(){
+  		//Listar as edicoes
   		
   		List<String> lista = null;
+  		copaDAO = new CopaDAOHibernate();
+  		selecaoDAO = new SelecaoDAOHibernate();
+  		
+  		//Varre a lista de copas...
+  		for(int i = 0; i < copaDAO.listar().size(); i++){
+  			//Varre a lista de selecoes da copa...
+  			for(int j = 0; j < copaDAO.listar().get(i).getSelecoes().size(); j++){
+  				//Pegar o campeao da copa... (o que ficou em primeiro lugar)
+  				if((copaDAO.listar().get(i).getSelecoes().get(j).getPosicao() == 1)){
+  					//E compara se o id do pais sede é o mesmo id do pais da selecao que ficou em primeiro
+  					if(copaDAO.listar().get(i).getPais().getId() == copaDAO.listar().get(i).getSelecoes().get(j).getPais().getId()){
+  						//Se for, é marmelada! =P
+  						//Adiciona a copa na lista no formato: AAAA (PAIS). Ex: 2014 (BRASIL)
+  						lista.add(copaDAO.listar().get(i).getAno().toString() + "(" + copaDAO.listar().get(i).getPais().getNome() + ")");
+  					}
+  				}
+  			}
+  		}
   		
   		return lista;
   	}
   	
-  	//UserStory#36
+  //UserStory#36
   	public List<String> consultarPaisesMaisTitulos(){
   		
   		List<String> lista = null;
+  		copaDAO = new CopaDAOHibernate();
+  		paisDAO = new PaisDAOHibernate();
+  		//linha 0: pais (id) | linha 1: quantidade de titulos. Cada coluna e um pais
+  		Long[][] titulos = new Long[2][paisDAO.listar().size()]; 
+  		
+  		//Adiciona todos os paises cadastrados na matriz, inicializando a quantidade de titulos com zero
+  		for(int i = 0; i < paisDAO.listar().size(); i++){
+  			titulos[0][i] = paisDAO.listar().get(i).getId();
+  			titulos[1][i] = (long) 0;
+  		}
+  		
+  		//Varre todas as copas...
+  		for(int i = 0; i < copaDAO.listar().size(); i++){
+  			//Varre todas as selecoes da copa...
+  			for(int j = 0; j < copaDAO.listar().get(i).getSelecoes().size(); j++){
+  				//Pega o campeao da copa...
+  				if(copaDAO.listar().get(i).getSelecoes().get(j).getPosicao() == 1){
+  					//Varre a matriz de titulos...
+  					for(int k = 0; k < paisDAO.listar().size(); k++){
+  						//incrementa a quantidade de titulos na matriz, na posicao referente ao pais em questao
+  						if(titulos[0][k] == copaDAO.listar().get(i).getSelecoes().get(j).getPais().getId()){
+  							titulos[1][k]++;
+  							break;
+  						}
+  					}
+  				}
+  			}
+  		}
+  		
+  		//Agora que temos uma matriz que guarda a quantidade de titulos de cada pais, vamos ordenar ele em ordem decrescente
+  		for (int i = 0; i < paisDAO.listar().size(); i++) {
+  			for(int j = i + 1; j < paisDAO.listar().size(); j++){
+  				if(titulos[1][i] < titulos[1][j]){
+  				     long aux = titulos[1][i];
+  				     titulos[1][i] = titulos[1][j];
+  				     titulos[1][j] = aux;
+  				}
+  			}
+  		}
+  		
+  		//Com o vetor ordenado em ordem decrescente, sabemos que as 5 primeiras coluans da matriz guardam os paises mais vitoriosos
+  		for(int i = 0; i < 5; i++){
+  			//Buscamos o nome do pais a partir do seu Id..
+  			String nome = null;
+  			for(int j = 0; j < paisDAO.listar().size(); j++){
+  				//pego  o nome...
+  				if(titulos[0][i] == paisDAO.listar().get(j).getId()){
+  					nome = new String(paisDAO.listar().get(j).getNome());
+  					break;
+  				}
+  			}
+  			
+  			//...e finalmente adiciono na lista de strings informando o nome e a quantidade de titulos.
+  			lista.add(nome + ": " + titulos[1][i].intValue() + " titulos."); //Exemplo: "Brasil: 5 titulos."
+  		}
   		
   		return lista;
   	}
   	
-  	//UserStory#37
+  //UserStory#37
   	public int consultarQntParticipacoesCopa(Pais pais){
   		
   		int quantidade = 0;
   		
+  		selecaoDAO = new SelecaoDAOHibernate();
+  		List<Selecao> selecao = selecaoDAO.listar();
+  		
+  		for(int i = 0; i < selecao.size(); i++){
+  			
+  			if(selecao.get(i).getPais() == pais){
+  				quantidade ++;
+  			}
+  				
+  		}
+  		
   		return quantidade;
+  		
   	}
   	
   	//UserStory#47 (Substitui a 38 pela 47)
@@ -746,11 +872,63 @@ public class Consultar {
   		return lista;
   	}
   	
-  	//UserStory#40
-  	public List<String> consultarPaisesMaisDerrotados(){
+  //UserStory#43 (Substitui a 40 pela 43)
+  	public List<String> listarJogadoresMaisJogos(){
+  		//OBS: exibir o jogador que mais jogou em copas (exibe a quantidade)
   		
   		List<String> lista = null;
+  		jogadorDAO = new JogadorDAOHibernate();
+  		copaDAO = new CopaDAOHibernate();
+  		int maior = 0; //armazena a maior quantidade de vezes que um jogador jogou
   		
+  		//Percorre a lista de jogadores cadastrados...
+  		for(int i = 0; i < jogadorDAO.listar().size(); i++){
+  			int qntJogos = 0; //contador de vezes que o jogador jogadorDAO.listar().get(i) jogou
+  			
+  			//Varre a lista de copas...
+  			for(int j = 0; j < copaDAO.listar().size(); j++){
+  				//Varre a lista de jogos da copa...
+  				for(int k = 0; k < copaDAO.listar().get(j).getJogos().size(); k++){
+  					//Varre a escalacao da selecao A...
+  					for(int a = 0; a < copaDAO.listar().get(j).getJogos().get(k).getEscalacaoA().getJogadores().size(); a++){
+  						//Verifica se o jogador foi escalado
+  						if(jogadorDAO.listar().get(i).getId() == copaDAO.listar().get(j).getJogos().get(k).getEscalacaoA().getJogadores().get(a).getId()){
+  							qntJogos++;
+  						}
+  					}
+  					//...da selecao B
+  					for(int b = 0; b < copaDAO.listar().get(j).getJogos().get(k).getEscalacaoA().getJogadores().size(); b++){
+  						//Verifica se o jogador foi escalado
+  						if(jogadorDAO.listar().get(i).getId() == copaDAO.listar().get(j).getJogos().get(k).getEscalacaoB().getJogadores().get(b).getId()){
+  							qntJogos++;
+  						}
+  					}
+  				}
+  			}
+  			
+  			//Comparada a quantidade de jogos dele com a maior registrada
+  			if(qntJogos > maior){
+  				String jogador = new String(jogadorDAO.listar().get(i).getNome() + " - " + qntJogos + " jogos.");
+  				if(lista == null){
+  					lista.add(jogador);
+  				}
+  				else{
+  					lista.clear();
+  					lista.add(jogador);
+  				}
+  			}
+  			
+  			if(qntJogos == maior){
+  				String jogador = new String(jogadorDAO.listar().get(i).getNome() + " - " + qntJogos + " jogos.");
+  				if(lista == null){
+  					lista.add(jogador);
+  				}
+  				else{
+  					lista.add(jogador);
+  				}
+  			}
+  		}
+  			
   		return lista;
   	}
   
