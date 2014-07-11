@@ -106,7 +106,7 @@ public class GolDAOHibernate implements GolDAO {
 			
 			HibernateUtil.getInstance();
 			sessao = HibernateUtil.getSessionFactory().openSession();
-			Query consulta = sessao.createQuery("delete from Escalacao");
+			Query consulta = sessao.createQuery("delete from Gol");
 			transacao = sessao.beginTransaction();
 			consulta.executeUpdate();
 			transacao.commit();
