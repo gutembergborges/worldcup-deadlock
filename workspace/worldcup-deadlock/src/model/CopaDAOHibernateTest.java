@@ -23,7 +23,7 @@ public class CopaDAOHibernateTest {
 	}
 
 	@Test
-	// N�O FUNCIONA!!!!! mas deveria "/
+	
 	public void testAtualizar() {
 		CopaDAOHibernate copaDAO = new CopaDAOHibernate();
 		Copa copa = copaDAO.buscar(1990);

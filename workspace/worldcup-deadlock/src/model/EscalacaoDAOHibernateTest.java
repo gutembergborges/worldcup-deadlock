@@ -23,7 +23,7 @@ public class EscalacaoDAOHibernateTest {
 	}
 
 	@Test
-	// N�O FUNCIONA!!!!! mas deveria "/
+	
 	public void testAtualizar() {
 		EscalacaoDAOHibernate escalacaoDAO = new EscalacaoDAOHibernate();
 		Escalacao escalacao = escalacaoDAO.buscar((long) 1);
