@@ -1,6 +1,6 @@
 package model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class CopaDAOHibernateTest {
 	}
 
 	@Test
-	// NÃO FUNCIONA!!!!! mas deveria "/
+	// Nï¿½O FUNCIONA!!!!! mas deveria "/
 	public void testAtualizar() {
 		CopaDAOHibernate copaDAO = new CopaDAOHibernate();
 		Copa copa = copaDAO.buscar(1990);

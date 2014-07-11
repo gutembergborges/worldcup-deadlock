@@ -1,10 +1,12 @@
 package model;
 
 import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import util.HibernateUtil;
 
 public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
@@ -25,7 +27,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 			
 		} catch (HibernateException e) {
 			
-			System.err.println("Não foi possivel inserir o objeto: " + e.getMessage());
+			System.err.println("Nï¿½o foi possivel inserir o objeto: " + e.getMessage());
 			
 		} finally {
 			try {
@@ -34,7 +36,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 				
 			} catch (Throwable e) {
 				
-				System.err.println("Erro ao fechar operação de inserção: " + e.getMessage());	
+				System.err.println("Erro ao fechar operaï¿½ï¿½o de inserï¿½ï¿½o: " + e.getMessage());	
 				
 			}
 		}
@@ -54,7 +56,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 			
 		} catch (HibernateException e) {
 			
-			System.err.println("Não foi possivel atualizar o objeto: " + e.getMessage());
+			System.err.println("Nï¿½o foi possivel atualizar o objeto: " + e.getMessage());
 			
 		} finally {
 			try {
@@ -63,7 +65,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 				
 			} catch (Throwable e) {
 				
-				System.err.println("Erro ao fechar operação de atualização: " + e.getMessage());	
+				System.err.println("Erro ao fechar operaï¿½ï¿½o de atualizaï¿½ï¿½o: " + e.getMessage());	
 				
 			}
 		}
@@ -83,7 +85,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 				
 		} catch (HibernateException e) {
 			
-			System.err.println("Não foi possivel excluir o objeto: " + e.getMessage());
+			System.err.println("Nï¿½o foi possivel excluir o objeto: " + e.getMessage());
 			
 		} finally {
 			try {
@@ -92,7 +94,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 				
 			} catch (Throwable e) {
 				
-				System.err.println("Erro ao fechar operação de exclusão: " + e.getMessage());	
+				System.err.println("Erro ao fechar operaï¿½ï¿½o de exclusï¿½o: " + e.getMessage());	
 				
 			}
 		}
@@ -113,7 +115,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 			
 		} catch (HibernateException e) {
 			
-			System.err.println("Não foi possivel excluir os objetos: " + e.getMessage());
+			System.err.println("Nï¿½o foi possivel excluir os objetos: " + e.getMessage());
 			
 		} finally {
 			try {
@@ -122,7 +124,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 				
 			} catch (Throwable e) {
 				
-				System.err.println("Erro ao fechar operação de exclusão: " + e.getMessage());	
+				System.err.println("Erro ao fechar operaï¿½ï¿½o de exclusï¿½o: " + e.getMessage());	
 				
 			}
 		}
@@ -141,13 +143,13 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 			sessao = HibernateUtil.getSessionFactory().openSession();
 			Query consulta = sessao.createQuery("from Substituicao");
 			transacao = sessao.beginTransaction();
-			resultado = (List<Substituicao>) consulta.list();
+			resultado = consulta.list();
 			transacao.commit();
 			return resultado;
 			
 		} catch (HibernateException e) {
 			
-			System.err.println("Não foi possivel listar os objetos: " + e.getMessage());
+			System.err.println("Nï¿½o foi possivel listar os objetos: " + e.getMessage());
 			throw new HibernateException(e);
 			
 		} finally {
@@ -157,7 +159,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 				
 			} catch (Throwable e) {
 				
-				System.err.println("Erro ao fechar operação de listagem: " + e.getMessage());	
+				System.err.println("Erro ao fechar operaï¿½ï¿½o de listagem: " + e.getMessage());	
 				
 			}
 		}
@@ -183,7 +185,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 			
 		} catch (HibernateException e) {
 			
-			System.err.println("Não foi possivel buscar o objeto: " + e.getMessage());
+			System.err.println("Nï¿½o foi possivel buscar o objeto: " + e.getMessage());
 			
 		} finally {
 			try {
@@ -192,7 +194,7 @@ public class SubstituicaoDAOHibernate implements SubstituicaoDAO{
 				
 			} catch (Throwable e) {
 				
-				System.err.println("Erro ao fechar operação de busca: " + e.getMessage());				
+				System.err.println("Erro ao fechar operaï¿½ï¿½o de busca: " + e.getMessage());				
 			}
 		}
 		
